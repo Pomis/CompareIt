@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CompareIt</string>
+    <string name="title_home">Offers</string>
+    <string name="title_dashboard">Products</string>
+    <string name="title_notifications">Lists</string>
+
+</resources>
