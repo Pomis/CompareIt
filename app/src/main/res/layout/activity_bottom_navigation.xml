@@ -7,37 +7,39 @@
     android:layout_height="match_parent"
     tools:context="pomis.app.compareit.activity.BottomNavigationActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/t_searchbar"
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<View-->
+        <!--android:id="@+id/v_back"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="150dp"/>-->
 
-        <com.mancj.materialsearchbar.MaterialSearchBar
-            android:id="@+id/searchBar"
-            style="@style/MaterialSearchBarLight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:mt_hint="Custom hint"
-            app:mt_maxSuggestionsCount="10"
-            app:mt_placeholder="e. g. Kohuke"
-            app:mt_speechMode="false" />
-    </android.support.v7.widget.Toolbar>
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/sv_searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:floatingSearch_close_search_on_keyboard_dismiss="true"
+        app:floatingSearch_searchBarMarginLeft="8dp"
+        app:floatingSearch_searchBarMarginRight="8dp"
+        app:floatingSearch_searchBarMarginTop="8dp"
+        app:floatingSearch_dimBackground="false"
+        app:floatingSearch_searchHint="e.g. Kohuke..."
+        app:floatingSearch_showSearchKey="true"
+        app:floatingSearch_suggestionsListAnimDuration="250" />
 
     <FrameLayout
         android:id="@+id/fl_container"
-        android:layout_below="@+id/t_searchbar"
-        android:layout_above="@id/bnv_navigation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bnv_navigation"
+        android:layout_below="@id/sv_searchbar" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bnv_navigation"
         android:layout_width="match_parent"
         android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
-        android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
         app:menu="@menu/navigation" />
 

@@ -2,11 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pomis.app.compareit.fragment.OffersFragment">
+    tools:context="pomis.app.compareit.fragment.ProductCategoriesFragment">
 
-    <com.mindorks.placeholderview.PlaceHolderView
-        android:padding="8dp"
-        android:id="@+id/phv_offers"
+    <com.mindorks.placeholderview.ExpandablePlaceHolderView
+        android:id="@+id/phv_categories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </FrameLayout>
