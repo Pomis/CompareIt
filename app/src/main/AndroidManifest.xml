@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.OfferDetailsActivity"
+        <activity android:name=".activity.TransparentActivity"
             android:theme="@style/AppTheme.Transparent">
 
         </activity>

@@ -25,7 +25,7 @@ class OfferDetailsFragment : Fragment() {
     }
 
     fun fill() {
-        offer = activity?.intent?.getSerializableExtra("offer") as Offer
+        offer = activity?.intent?.getSerializableExtra("obj") as Offer
         tv_offer_title.text = offer.name
         tv_offer_description.text = offer.text
         Glide.with(activity).load(offer.image).into(iv_offer_image)

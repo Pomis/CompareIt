@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pomis.app.compareit.activity.OfferDetailsActivity">
-    <fragment
-        android:id="@+id/f_details"
+    tools:context="pomis.app.compareit.activity.TransparentActivity">
+    <FrameLayout
+        android:id="@+id/fl_details"
         android:layout_margin="32dp"
-        android:name="pomis.app.compareit.fragment.OfferDetailsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </android.support.constraint.ConstraintLayout>

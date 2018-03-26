@@ -6,7 +6,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.mindorks.placeholderview.annotations.*
 import pomis.app.compareit.R
-import pomis.app.compareit.activity.OfferDetailsActivity
+import pomis.app.compareit.activity.TransparentActivity
 import pomis.app.compareit.model.Offer
 
 @Layout(R.layout.item_offer)
@@ -27,8 +27,6 @@ open class OfferPlaceholder(private val offer: Offer) {
 
     @Click(R.id.cv_card)
     fun onClick() {
-        val intent = Intent(background.context, OfferDetailsActivity::class.java)
-        intent.putExtra("offer", offer)
-        background.context.startActivity(intent)
+        TransparentActivity.start(background.context, offer)
     }
 }
