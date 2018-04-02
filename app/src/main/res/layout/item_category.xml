@@ -5,6 +5,8 @@
     <ImageView
         android:id="@+id/iv_category_image"
         android:layout_margin="16dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:scaleType="centerInside"
         android:layout_width="32dp"
         android:layout_height="32dp" />
     <TextView

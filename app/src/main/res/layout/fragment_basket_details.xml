@@ -5,15 +5,48 @@
     android:layout_height="match_parent"
     tools:context=".fragment.BasketDetailsFragment">
 
-    <ImageView
-        android:layout_marginTop="200dp"
-        android:transitionName="trans"
-        android:id="@+id/iv_basket_shop_large"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:minHeight="200dp"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tv_basket_name_detailed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_basket_shop_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:minHeight="200dp"
+                    android:transitionName="trans" />
+
+                <TextView
+                    android:id="@+id/tv_basket_name_detailed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_margin="16dp"
+                    android:layout_below="@id/iv_basket_shop_large"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:transitionName="transText" />
+
+                <com.mindorks.placeholderview.PlaceHolderView
+                    android:id="@+id/phv_shops"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.mindorks.placeholderview.PlaceHolderView
+                    android:id="@+id/phv_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+        </ScrollView>
+    </android.support.v7.widget.CardView>
 </FrameLayout>

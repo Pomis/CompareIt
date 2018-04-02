@@ -1,0 +1,55 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pomis.app.compareit.fragment.OfferDetailsFragment">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:id="@+id/s"
+                android:layout_marginBottom="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+
+                    <TextView
+                        android:text="You can specify wanted product."
+                        android:layout_margin="16dp"
+                        android:textSize="20sp"
+                        android:id="@+id/tv_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.mindorks.placeholderview.PlaceHolderView
+                        android:layout_below="@id/tv_hint"
+                        android:id="@+id/phv_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+            </ScrollView>
+
+
+            <Button
+                android:id="@+id/b_add_to_basket"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_margin="16dp"
+                android:layout_height="wrap_content" />
+
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+</FrameLayout>

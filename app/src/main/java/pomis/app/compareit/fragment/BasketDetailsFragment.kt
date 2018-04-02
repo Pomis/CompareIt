@@ -33,64 +33,12 @@ class BasketDetailsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_basket_details, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            sharedElementEnterTransition = TransitionInflater.from(context)
-//                    .inflateTransition(R.transition.transition_shared_basket)
-                    .inflateTransition(android.R.transition.move)
-
-//            postponeEnterTransition()
-        }
-    }
-
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enterTransition()
+        basket = activity?.intent?.getSerializableExtra("obj") as Basket
+        tv_basket_name_detailed.text = basket.name
+        Glide.with(this)
+                .load(basket.imageUrl)
+                .into(iv_basket_shop_large)
     }
-
-    fun enterTransition() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-            basket = arguments.getSerializable("obj") as Basket
-            val transitionName = arguments.getString("transitionName")
-
-//            ViewCompat.setTransitionName(iv_basket_shop_large, transitionName)
-//            ViewCompat.setTransitionName(tv_basket_name_detailed, transitionName)
-
-            startPostponedEnterTransition()
-
-//            tv_basket_name_detailed.text = basket.name
-            Glide.with(context)
-                    .load(basket.imageUrl)
-                    .listener(object: RequestListener<Drawable?> {
-                        @RequiresApi(Build.VERSION_CODES.O)
-                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable?>?, isFirstResource: Boolean): Boolean {
-                            startPostponedEnterTransition()
-                            return false
-                        }
-
-                        @RequiresApi(Build.VERSION_CODES.O)
-                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable?>?, dataSource: com.bumptech.glide.load.DataSource?, isFirstResource: Boolean): Boolean {
-                            startPostponedEnterTransition()
-                            return false
-                        }
-                    })
-//                    .into(iv_basket_shop_large as ImageView)
-
-        }
-    }
-    companion object {
-        fun newInstance(basket: Basket, transitionName: String): BasketDetailsFragment {
-            val fragment = BasketDetailsFragment()
-            val bundle = Bundle()
-            bundle.putSerializable("obj", basket)
-            bundle.putString("transitionName", transitionName)
-            fragment.setArguments(bundle)
-            return fragment
-        }
-    }
-
-
-
 }

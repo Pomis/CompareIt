@@ -35,26 +35,14 @@ class ProductCategoriesFragment : Fragment() {
                 .schedule()
                 .flatMapIterable { it }
                 .map { CategoryPlaceholder(it) }
-                .subscribe ({ category ->
-
-                    phv_categories.addView(category)
-                    api.getCategory(category.category._id)
-                            .schedule()
-                            .flatMapIterable { it.typeDTOS }
+                .subscribe ({c ->
+                    phv_categories.addView(c)
+                    c.category.typeDTOS
                             .map { TypePlaceholder(it) }
-                            .subscribe ({
-                                type -> phv_categories.addChildView(category.mParentPosition, type)
-                            },{
-                                it.printStackTrace()
-                            })
-
+                            .forEach { phv_categories.addChildView(c.mParentPosition, it) }
                 }, {
                     it.printStackTrace()
                     Toast.makeText(activity, "No connection", LENGTH_SHORT).show()
                 })
-
-//        phv_categories.addView(CategoryPlaceholder(ProductCategory("fruits")))
-//        phv_categories.addChildView(0, TypePlaceholder(ProductType("apple")))
-
     }
 }

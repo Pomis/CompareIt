@@ -25,7 +25,7 @@ interface CompareitRouter {
     fun getCategory(@Path("cid") cid: Int): Observable<ProductCategory>
 
     @GET("products/{tid}") // get all products for selected type
-    fun getProductsByType(@Path("tid") tid:String): Observable<List<Product>>
+    fun getProductType(@Path("tid") tid: Int): Observable<ProductType>
 //
 //    @GET("/baskets")
 //    fun getBaskets(): Observable<List<Basket>>

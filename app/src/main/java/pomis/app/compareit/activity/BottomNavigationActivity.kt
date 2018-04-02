@@ -38,8 +38,12 @@ class BottomNavigationActivity : BaseActivity() {
         setContentView(R.layout.activity_bottom_navigation)
 
         fragmentManager.beginTransaction().add(R.id.fl_container, OffersFragment(), "content").commit()
-        bnv_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         initSearch()
+    }
+
+    private fun initBottom() {
+        bnv_navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
     }
 
     private fun initSearch() {
