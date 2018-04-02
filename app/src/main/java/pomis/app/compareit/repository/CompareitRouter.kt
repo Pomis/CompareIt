@@ -15,13 +15,16 @@ import retrofit2.http.Path
 
 interface CompareitRouter {
 
-    @GET("/offers")
+    @GET("offers")
     fun getOffers(): Observable<List<Offer>>
 
-    @GET("/categories") // contains nested types
+    @GET("categories") // contains nested types
     fun getCategories(): Observable<List<ProductCategory>>
 
-    @GET("/products/{tid}") // get all products for selected type
+    @GET("categories/{cid}")
+    fun getCategory(@Path("cid") cid: Int): Observable<ProductCategory>
+
+    @GET("products/{tid}") // get all products for selected type
     fun getProductsByType(@Path("tid") tid:String): Observable<List<Product>>
 //
 //    @GET("/baskets")
@@ -33,10 +36,10 @@ interface CompareitRouter {
 //    @POST("/baskets/{id}/add")
 //    fun addToBasket(@Body product: Product): Call<Void>
 
-    @POST("/products/search")
+    @POST("products/search")
     fun search(@Body string: String): Observable<List<Product>>
 
-    @POST("/baskets/compare")
+    @POST("baskets/compare")
     fun compare(@Body basket: Basket): Observable<List<Store>>
 
     companion object Factory {
@@ -44,7 +47,7 @@ interface CompareitRouter {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("https://localhost:8080/")
+                    .baseUrl("http://10.0.2.2:8080/api/")
                     .build()
 
             return retrofit.create(CompareitRouter::class.java)

@@ -3,6 +3,7 @@
     package="pomis.app.compareit">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -20,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.TransparentActivity"
-            android:theme="@style/AppTheme.Transparent">
-
-        </activity>
+        <activity
+            android:name=".activity.TransparentActivity"
+            android:theme="@style/AppTheme.Transparent"></activity>
+        <activity android:name=".activity.BasketDetailsActivity"></activity>
     </application>
 
 </manifest>
