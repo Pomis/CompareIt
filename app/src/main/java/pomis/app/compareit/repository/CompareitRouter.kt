@@ -22,19 +22,10 @@ interface CompareitRouter {
     fun getCategories(): Observable<List<ProductCategory>>
 
     @GET("categories/{cid}")
-    fun getCategory(@Path("cid") cid: Int): Observable<ProductCategory>
+    fun getCategory(@Path("cid") cid: Int): Single<ProductCategory>
 
     @GET("products/{tid}") // get all products for selected type
-    fun getProductType(@Path("tid") tid: Int): Observable<ProductType>
-//
-//    @GET("/baskets")
-//    fun getBaskets(): Observable<List<Basket>>
-//
-//    @POST("/baskets/create")
-//    fun postBasket(@Body basket: Basket): Call<Void>
-//
-//    @POST("/baskets/{id}/add")
-//    fun addToBasket(@Body product: Product): Call<Void>
+    fun getProductType(@Path("tid") tid: Int): Single<ProductType>
 
     @POST("products/search")
     fun search(@Body string: String): Observable<List<Product>>
@@ -43,11 +34,15 @@ interface CompareitRouter {
     fun compare(@Body basket: Basket): Observable<List<Store>>
 
     companion object Factory {
+        val LOCALHOST: String = "http://10.0.2.2:8080/api/"
+        val HEROKU_DEV: String = "https://compare-it-app.herokuapp.com/api/"
+        val EATT_DEV: String = "http://eatt.eu:8090/api/"
+
         fun create(): CompareitRouter {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("http://10.0.2.2:8080/api/")
+                    .baseUrl(EATT_DEV)
                     .build()
 
             return retrofit.create(CompareitRouter::class.java)

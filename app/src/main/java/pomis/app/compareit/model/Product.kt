@@ -8,14 +8,5 @@ import java.io.Serializable
  */
 data class Product(
         val name: String,
-        val imageDTO: Image?
-):Serializable
-
-data class Image(
-        val _id: Int,
-        val links: List<Link>
-):Serializable
-
-data class Link(
-        val href: String
+        val imageURL: String?
 ):Serializable

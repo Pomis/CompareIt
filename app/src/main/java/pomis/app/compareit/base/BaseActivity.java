@@ -14,7 +14,7 @@ public class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
     }
 
-    @Override // This is optional, only when we want to keep arguments changes in case of rotation etc.
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }

@@ -12,16 +12,20 @@ import kotlinx.android.synthetic.main.fragment_offers.*
 import kotlinx.android.synthetic.main.fragment_type_details.*
 
 import pomis.app.compareit.R
+import pomis.app.compareit.model.Basket
 import pomis.app.compareit.model.Product
 import pomis.app.compareit.model.ProductType
 import pomis.app.compareit.repository.CompareitRouter
+import pomis.app.compareit.utils.handle
 import pomis.app.compareit.utils.schedule
 import pomis.app.compareit.view.ProductPlaceholder
 
 
 class TypeDetailsFragment : Fragment() {
     lateinit var productType: ProductType
+
     val api by inject<CompareitRouter>()
+    val baskets by inject<ArrayList<Basket>>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -40,14 +44,14 @@ class TypeDetailsFragment : Fragment() {
         )))
         api.getProductType(productType.id)
                 .schedule()
-                .flatMapIterable { it.items }
+                .flattenAsObservable { it.items }
                 .map { ProductPlaceholder(it) }
-                .subscribe({
+                .handle(activity, {
                     Log.d("KEK", it.product.toString())
                     phv_products.addView(it)
-                }, {
-                    it.printStackTrace()
                 })
+        ms_baskets.setItems(baskets.map { it.name })
+        ms_baskets.setOnItemSelectedListener{ _, i, _, _ -> baskets[i].items.add(Product(productType.name, null)) }
     }
 
 }

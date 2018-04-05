@@ -15,6 +15,7 @@ import pomis.app.compareit.R
 import pomis.app.compareit.model.ProductCategory
 import pomis.app.compareit.model.ProductType
 import pomis.app.compareit.repository.CompareitRouter
+import pomis.app.compareit.utils.handle
 import pomis.app.compareit.utils.schedule
 import pomis.app.compareit.view.CategoryPlaceholder
 import pomis.app.compareit.view.TypePlaceholder
@@ -33,16 +34,12 @@ class ProductCategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         api.getCategories()
                 .schedule()
-                .flatMapIterable { it }
                 .map { CategoryPlaceholder(it) }
-                .subscribe ({c ->
+                .handle(activity, { c ->
                     phv_categories.addView(c)
                     c.category.typeDTOS
                             .map { TypePlaceholder(it) }
                             .forEach { phv_categories.addChildView(c.mParentPosition, it) }
-                }, {
-                    it.printStackTrace()
-                    Toast.makeText(activity, "No connection", LENGTH_SHORT).show()
                 })
     }
 }

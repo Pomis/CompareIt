@@ -28,7 +28,7 @@ class OfferDetailsFragment : Fragment() {
         offer = activity?.intent?.getSerializableExtra("obj") as Offer
         tv_offer_title.text = offer.name
         tv_offer_description.text = offer.text
-        Glide.with(activity).load(offer.image).into(iv_offer_image)
+        Glide.with(activity).load(offer.imageURL).into(iv_offer_image)
     }
 
 }

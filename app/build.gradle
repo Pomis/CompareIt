@@ -59,4 +59,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
+    implementation 'com.jaredrummler:material-spinner:1.2.5'
+
+    implementation 'com.github.GrenderG:Toasty:1.2.5'
 }

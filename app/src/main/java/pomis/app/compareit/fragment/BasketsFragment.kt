@@ -4,6 +4,7 @@ package pomis.app.compareit.fragment
 import android.os.Bundle
 import android.app.Fragment
 import android.app.SharedElementCallback
+import android.app.inject
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import android.transition.TransitionInflater
 
 
 class BasketsFragment : Fragment() {
+    val baskets by inject<ArrayList<Basket>>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,18 +31,7 @@ class BasketsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        phv_baskets.addView(BasketPlaceholder(Basket(
-                "Weekly products", "http://volex.ee/wp-content/uploads/2016/05/DCS-32.jpg",
-                BigDecimal(10), listOf(Product("cheese", null), Product("meelk", null))
-        ), activity))
-        phv_baskets.addView(BasketPlaceholder(Basket(
-                "HHHH Productz", "https://static1.visitestonia.com/images/1099263/Selver_.jpg",
-                BigDecimal(10), listOf(Product("cheese", null), Product("meelk", null))
-        ), activity))
-        phv_baskets.addView(BasketPlaceholder(Basket(
-                "Yet another basket", "https://f9.pmo.ee/OlAyt5o8uKtucUSyDttgH2yX3to=/685x410/smart/nginx/o/2011/11/02/818206t1h7e43.jpg",
-                BigDecimal(10), listOf(Product("cheese", null), Product("meelk", null))
-        ), activity))
+        baskets.map { BasketPlaceholder(it, activity) }.forEach{ phv_baskets.addView(it) }
     }
 
 

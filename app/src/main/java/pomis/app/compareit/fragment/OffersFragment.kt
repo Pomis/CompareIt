@@ -14,6 +14,9 @@ import pomis.app.compareit.R
 import pomis.app.compareit.model.Offer
 import pomis.app.compareit.view.OfferPlaceholder
 import pomis.app.compareit.repository.CompareitRouter
+import pomis.app.compareit.utils.ErrorHandler
+import pomis.app.compareit.utils.handle
+import pomis.app.compareit.utils.schedule
 
 
 class OffersFragment : Fragment() {
@@ -27,20 +30,10 @@ class OffersFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         phv_offers.layoutManager = GridLayoutManager(activity, 2)
-        phv_offers.addView(OfferPlaceholder(Offer(
-                "Liquid Liquidation!","description sdfjsdklfjsdlkfjskldjf klsdjf lkdjf l",
-                "https://avatars.mds.yandex.net/get-pdb/872807/9c81bef6-a368-4756-b85b-443e659f96ea/s1200")))
-        phv_offers.addView(OfferPlaceholder(Offer(
-                "Cheese cheesing!", "description sdfjsdklfjsdlkfjskldjf klsdjf lkdjf l",
-                "https://avatars.mds.yandex.net/get-pdb/872807/9c81bef6-a368-4756-b85b-443e659f96ea/s1200")))
-        phv_offers.addView(OfferPlaceholder(Offer(
-                "Beer bearing!","description sdfjsdklfjsdlkfjskldjf klsdjf lkdjf l",
-                "http://toptenliquors.com/app/uploads/2016/02/Beer-Bomber-Sale-FB-Event-e1456180353233.jpg")))
-        phv_offers.addView(OfferPlaceholder(Offer(
-                "Cheese cheesing!","description sdfjsdklfjsdlkfjskldjf klsdjf lkdjf l",
-                "https://avatars.mds.yandex.net/get-pdb/872807/9c81bef6-a368-4756-b85b-443e659f96ea/s1200")))
-        phv_offers.addView(OfferPlaceholder(Offer(
-                "Beer bearing!","description sdfjsdklfjsdlkfjskldjf klsdjf lkdjf l",
-                "http://toptenliquors.com/app/uploads/2016/02/Beer-Bomber-Sale-FB-Event-e1456180353233.jpg")))
+        api.getOffers().schedule()
+                .map { OfferPlaceholder(it) }
+                .handle(activity, {
+                    phv_offers.addView(it)
+                })
     }
 }

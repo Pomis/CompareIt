@@ -20,8 +20,8 @@ class ProductPlaceholder(val product : Product) {
     @Resolve
     fun onResolve() {
         tvProductName.text = product.name
-        if (product.imageDTO!=null)
-            Glide.with(ivProductPhoto).load(product.imageDTO.links.get(0).href).into(ivProductPhoto)
+        if (product.imageURL!=null)
+            Glide.with(ivProductPhoto).load(product.imageURL).into(ivProductPhoto)
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.mindorks.placeholderview.Animation
 import com.mindorks.placeholderview.annotations.*
 import pomis.app.compareit.R
 import pomis.app.compareit.activity.TransparentActivity
@@ -22,7 +23,7 @@ open class OfferPlaceholder(private val offer: Offer) {
     @Resolve
     fun onResolve() {
         label.text = offer.name
-        Glide.with(background).load(offer.image).into(background)
+        Glide.with(background).load(offer.imageURL).into(background)
     }
 
     @Click(R.id.cv_card)
