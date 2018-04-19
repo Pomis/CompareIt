@@ -44,11 +44,13 @@ class BasketPlaceholder(val basket: Basket, val activity: Activity) {
 
     @Click(R.id.cv_basket)
     fun onClick() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             TransparentActivity.start(activity, ivBasketShop, tvBasketName, basket)
-        } else {
-            // start normally
         }
+        // } else {
+       //     TransparentActivity.start(activity, ivBasketShop, tvBasketName, basket)
+       // }
     }
 
 }

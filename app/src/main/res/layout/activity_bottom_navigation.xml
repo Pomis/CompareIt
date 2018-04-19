@@ -7,16 +7,11 @@
     android:layout_height="match_parent"
     tools:context="pomis.app.compareit.activity.BottomNavigationActivity">
 
-    <!--<View-->
-        <!--android:id="@+id/v_back"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="150dp"/>-->
-
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/sv_searchbar"
         android:layout_width="match_parent"
         android:layout_height="64dp"
+        android:layout_marginTop="24dp"
         app:floatingSearch_close_search_on_keyboard_dismiss="true"
         app:floatingSearch_searchBarMarginLeft="8dp"
         app:floatingSearch_searchBarMarginRight="8dp"
@@ -30,7 +25,7 @@
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="86dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation

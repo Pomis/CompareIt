@@ -41,6 +41,7 @@ class BottomNavigationActivity : BaseActivity() {
             defaultBackgroundColor = Color.WHITE
             setColoredModeColors(Color.WHITE, Color.RED)
             isBehaviorTranslationEnabled = true
+            isTranslucentNavigationEnabled = true
 
             setOnTabSelectedListener({ position, wasSelected ->
                 if (!wasSelected) {

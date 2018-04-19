@@ -18,6 +18,8 @@ import pomis.app.compareit.view.BasketPlaceholder
 import java.math.BigDecimal
 import android.support.v7.widget.RecyclerView
 import android.transition.TransitionInflater
+import pomis.app.compareit.view.ProductPlaceholder
+import pomis.app.compareit.view.SeparatorPlaceholder
 
 
 class BasketsFragment : Fragment() {
@@ -32,6 +34,7 @@ class BasketsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         baskets.map { BasketPlaceholder(it, activity) }.forEach{ phv_baskets.addView(it) }
+        phv_baskets.addView(SeparatorPlaceholder())
     }
 
 

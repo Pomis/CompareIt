@@ -42,7 +42,7 @@ interface CompareitRouter {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(EATT_DEV)
+                    .baseUrl(HEROKU_DEV)
                     .build()
 
             return retrofit.create(CompareitRouter::class.java)
