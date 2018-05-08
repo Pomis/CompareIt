@@ -14,13 +14,25 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import android.graphics.Color.parseColor
 import android.R.attr.fragment
 import android.app.Fragment
+import android.app.inject
 import android.graphics.Color
 import android.os.Build
 import android.os.Handler
+import android.util.Log
+import android.widget.EditText
+import android.widget.TextView
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+import com.jakewharton.rxbinding2.widget.RxSearchView
+import com.jakewharton.rxbinding2.widget.RxTextView
+import pomis.app.compareit.R.id.search_bar_text
+import pomis.app.compareit.repository.CompareitRouter
+import pomis.app.compareit.utils.schedule
 import pomis.app.compareit.utils.setStatusBarColor
+import java.util.concurrent.TimeUnit
 
 class BottomNavigationActivity : BaseActivity() {
+    val api by inject<CompareitRouter>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bottom_navigation)
@@ -64,6 +76,12 @@ class BottomNavigationActivity : BaseActivity() {
     }
 
     private fun initSearch() {
-        //
+        RxTextView.afterTextChangeEvents(findViewById<EditText>(R.id.search_bar_text))
+                .skipInitialValue()
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .distinctUntilChanged()
+                .switchMap { api.search(it.editable().toString()) }
+                .schedule()
+                .subscribe { Log.d("KEK", it.name) }
     }
 }
