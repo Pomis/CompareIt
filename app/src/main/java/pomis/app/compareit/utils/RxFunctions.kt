@@ -16,6 +16,11 @@ fun <T> Observable<List<T>>.schedule(): Observable<T> {
             .flatMapIterable { it }
 }
 
+fun <T> Observable<T>.scheduleFlat(): Observable<T> {
+    return this.subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+}
+
 fun <T> Single<T>.schedule(): Single<T> {
     return this.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
 }

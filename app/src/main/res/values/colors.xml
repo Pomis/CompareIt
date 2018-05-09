@@ -10,4 +10,5 @@
     <color name="colorOffers">#512DA8</color>
     <color name="colorProducts">#689F38</color>
     <color name="colorBaskets">#D32F2F</color>
+    <color name="colorSearch">#666</color>
 </resources>

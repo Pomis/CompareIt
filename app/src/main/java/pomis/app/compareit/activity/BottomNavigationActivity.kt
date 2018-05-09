@@ -21,17 +21,24 @@ import android.os.Handler
 import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
+import androidx.view.size
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.jakewharton.rxbinding2.widget.RxSearchView
 import com.jakewharton.rxbinding2.widget.RxTextView
+import es.dmoral.toasty.Toasty
 import pomis.app.compareit.R.id.search_bar_text
+import pomis.app.compareit.fragment.SearchResultFragment
+import pomis.app.compareit.model.SearchResult
 import pomis.app.compareit.repository.CompareitRouter
+import pomis.app.compareit.utils.ErrorHandler
 import pomis.app.compareit.utils.schedule
+import pomis.app.compareit.utils.scheduleFlat
 import pomis.app.compareit.utils.setStatusBarColor
 import java.util.concurrent.TimeUnit
 
 class BottomNavigationActivity : BaseActivity() {
     val api by inject<CompareitRouter>()
+    lateinit var fragmentAndColor: Pair<Fragment, Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,8 @@ class BottomNavigationActivity : BaseActivity() {
         initSearch()
         initBottom()
     }
+
+    override fun onBackPressed() {}
 
     private fun initBottom() {
         with(bottom_navigation) {
@@ -57,31 +66,47 @@ class BottomNavigationActivity : BaseActivity() {
 
             setOnTabSelectedListener({ position, wasSelected ->
                 if (!wasSelected) {
-                    val (fragment, color) = when(position) {
-                        0 -> Pair(OffersFragment(), R.color.colorOffers)
-                        1 -> Pair(ProductCategoriesFragment(), R.color.colorProducts)
-                        2 -> Pair(BasketsFragment(), R.color.colorBaskets)
-                        else -> Pair(Fragment(), R.color.colorPrimary)
-                    }
-
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, fragment, "content").commit()
-                    Handler().postDelayed({setStatusBarColor(color)},150)
+                    changeFragment(position)
                 }
                 true
             })
         }
+    }
 
 
+    private fun changeFragment(position: Int) {
+        fragmentAndColor = when (position) {
+            0 -> Pair(OffersFragment(), R.color.colorOffers)
+            1 -> Pair(ProductCategoriesFragment(), R.color.colorProducts)
+            2 -> Pair(BasketsFragment(), R.color.colorBaskets)
+            3 -> Pair(SearchResultFragment(), R.color.colorSearch)
+            else -> Pair(Fragment(), R.color.colorPrimary)
+        }
+        fragmentManager.beginTransaction()
+                .replace(R.id.fl_container, fragmentAndColor.first, "content").commit()
+        Handler().postDelayed({
+            setStatusBarColor(fragmentAndColor.second)
+            if (position != 3) bottom_navigation.removeItemAtIndex(3)
+        }, 150)
     }
 
     private fun initSearch() {
         RxTextView.afterTextChangeEvents(findViewById<EditText>(R.id.search_bar_text))
                 .skipInitialValue()
                 .debounce(500, TimeUnit.MILLISECONDS)
+                .filter { it != null && !it.editable().isNullOrBlank() }
                 .distinctUntilChanged()
                 .switchMap { api.search(it.editable().toString()) }
-                .schedule()
-                .subscribe { Log.d("KEK", it.name) }
+                .scheduleFlat()
+                .onErrorReturn { null }
+                .retry()
+                .subscribe({
+                    if (bottom_navigation.itemsCount < 4)
+                        bottom_navigation.addItem(AHBottomNavigationItem(R.string.search, R.drawable.ic_sale, R.color.colorSearch))
+                    bottom_navigation.setCurrentItem(3, true)
+                    (fragmentAndColor.first as SearchResultFragment).searchResult = it
+                }, {
+                    ErrorHandler.handle(it, this)
+                })
     }
 }

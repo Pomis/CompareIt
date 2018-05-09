@@ -27,8 +27,8 @@ interface CompareitRouter {
     @GET("products/{tid}") // get all products for selected type
     fun getProductType(@Path("tid") tid: Int): Single<ProductType>
 
-    @POST("products/search")
-    fun search(@Body string: String): Observable<List<Product>>
+    @GET("search/{key}")
+    fun search(@Path("key") key: String): Observable<SearchResult>
 
     @POST("baskets/compare")
     fun compare(@Body basket: Basket): Observable<List<Store>>

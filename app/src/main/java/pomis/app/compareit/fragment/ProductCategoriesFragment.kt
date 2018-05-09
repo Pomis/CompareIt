@@ -36,6 +36,7 @@ class ProductCategoriesFragment : Fragment() {
                 .schedule()
                 .map { CategoryPlaceholder(it) }
                 .handle(activity, { c ->
+                    spin_kit.visibility = View.GONE
                     phv_categories.addView(c)
                     c.category.typeDTOS
                             .map { TypePlaceholder(it) }
