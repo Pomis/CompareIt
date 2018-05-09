@@ -6,6 +6,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.mindorks.placeholderview.Animation
 import com.mindorks.placeholderview.annotations.*
+import org.w3c.dom.Text
 import pomis.app.compareit.R
 import pomis.app.compareit.activity.TransparentActivity
 import pomis.app.compareit.model.Offer
@@ -20,9 +21,13 @@ open class OfferPlaceholder(private val offer: Offer) {
     @View(R.id.iv_bg)
     lateinit var background: ImageView
 
+    @View(R.id.tv_store)
+    lateinit var store: TextView
+
     @Resolve
     fun onResolve() {
         label.text = offer.name
+        store.text = offer.store.name
         Glide.with(background).load(offer.imageURL).into(background)
     }
 

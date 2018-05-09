@@ -93,7 +93,7 @@ class BottomNavigationActivity : BaseActivity() {
     private fun initSearch() {
         RxTextView.afterTextChangeEvents(findViewById<EditText>(R.id.search_bar_text))
                 .skipInitialValue()
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(300, TimeUnit.MILLISECONDS)
                 .filter { it != null && !it.editable().isNullOrBlank() }
                 .distinctUntilChanged()
                 .switchMap { api.search(it.editable().toString()) }

@@ -14,7 +14,7 @@ import pomis.app.compareit.R
 import pomis.app.compareit.activity.TransparentActivity
 
 @Layout(R.layout.item_type)
-class TypePlaceholder(val productType: ProductType) {
+class ProductTypePlaceholder(val productType: ProductType) {
 
     @ParentPosition
     var parentPosition: Int = 0

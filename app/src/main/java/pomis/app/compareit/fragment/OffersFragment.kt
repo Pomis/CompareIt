@@ -34,6 +34,7 @@ class OffersFragment : Fragment() {
                 .map { OfferPlaceholder(it) }
                 .handle(activity, {
                     phv_offers.addView(it)
+                    spin_kit.visibility = View.GONE
                 })
     }
 }

@@ -24,6 +24,9 @@ import javax.sql.DataSource
 import android.widget.TextView
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.item_basket.*
+import pomis.app.compareit.model.Store
+import pomis.app.compareit.view.HeaderPlaceholder
+import pomis.app.compareit.view.StoreListPlaceholder
 
 class BasketDetailsFragment : Fragment() {
     lateinit var basket: Basket
@@ -40,5 +43,8 @@ class BasketDetailsFragment : Fragment() {
         Glide.with(this)
                 .load(basket.imageUrl)
                 .into(iv_basket_shop_large)
+
+        phv_shops.addView(StoreListPlaceholder(basket.prices.map { it.store }, phv_shops))
+
     }
 }

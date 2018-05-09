@@ -24,10 +24,10 @@ var list: ArrayList<Basket> = ArrayList()
 
 fun getMockBaskets():ArrayList<Basket>{
     if (list.size == 0) {
-        val price1 = Price(Store("MAXIMA"), BigDecimal(10), 0.98f)
-        val price2 = Price(Store("Selver"), BigDecimal(15), 0.93f)
-        val price3 = Price(Store("Prisma"), BigDecimal(14), 0.91f)
-        val price4 = Price(Store("Prisma"), BigDecimal(23), 0.91f)
+        val price1 = Price(Store("MAXIMA", null), BigDecimal(10), 0.98f)
+        val price2 = Price(Store("Selver", null), BigDecimal(15), 0.93f)
+        val price3 = Price(Store("Prisma", null), BigDecimal(14), 0.91f)
+        val price4 = Price(Store("Prisma", null), BigDecimal(23), 0.91f)
         list.add(Basket(
                 "Weekly products",
                 "http://volex.ee/wp-content/uploads/2016/05/DCS-32.jpg",

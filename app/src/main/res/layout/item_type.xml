@@ -2,8 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/rl_type"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:layout_margin="16dp"
+        android:id="@+id/iv_type_circle"
+        android:src="@drawable/ic_circle"
+        android:layout_width="32dp"
+        android:layout_height="32dp" />
 
     <TextView
         android:id="@+id/tv_type"

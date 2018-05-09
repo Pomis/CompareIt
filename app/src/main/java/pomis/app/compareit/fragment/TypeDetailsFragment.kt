@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.view.RxView
 import kotlinx.android.synthetic.main.fragment_offers.*
 import kotlinx.android.synthetic.main.fragment_type_details.*
 
@@ -19,13 +20,19 @@ import pomis.app.compareit.repository.CompareitRouter
 import pomis.app.compareit.utils.handle
 import pomis.app.compareit.utils.schedule
 import pomis.app.compareit.view.ProductPlaceholder
-
+import java.util.concurrent.TimeUnit
 
 class TypeDetailsFragment : Fragment() {
-    lateinit var productType: ProductType
+    private lateinit var productType: ProductType
+    private var selectedProduct: Product? = null
+        set(value) {
+            field = value
+            b_add_to_basket.text = "Add ${selectedProduct?.name} to basket"
+        }
+    private var selectedBasket: Basket? = null
 
-    val api by inject<CompareitRouter>()
-    val baskets by inject<ArrayList<Basket>>()
+    private val api by inject<CompareitRouter>()
+    private val baskets by inject<ArrayList<Basket>>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -35,23 +42,41 @@ class TypeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initList()
+        initButton()
+    }
 
+    private fun initButton() {
+        RxView.clicks(b_add_to_basket)
+                .debounce(1, TimeUnit.SECONDS)
+                .subscribe {
+                    selectedProduct?.let { selectedBasket?.items?.add(it) }
+                    activity.finish()
+                }
+    }
+
+    private fun initList() {
         productType = activity?.intent?.getSerializableExtra("obj") as ProductType
-        b_add_to_basket.text = "Add any ${productType.name} to basket"
         phv_products.layoutManager = GridLayoutManager(activity, 3)
-        phv_products.addView(ProductPlaceholder(Product(
-                "any "+productType.name, null
-        )))
+        phv_products.addView(generateProductTypePlaceholder())
         api.getProductType(productType.id)
                 .schedule()
                 .flattenAsObservable { it.items }
-                .map { ProductPlaceholder(it) }
+                .map { ProductPlaceholder(it, { selectedProduct = it }) }
                 .handle(activity, {
                     Log.d("KEK", it.product.toString())
                     phv_products.addView(it)
                 })
         ms_baskets.setItems(baskets.map { it.name })
-        ms_baskets.setOnItemSelectedListener{ _, i, _, _ -> baskets[i].items.add(Product(productType.name, null)) }
+        ms_baskets.setOnItemSelectedListener { _, i, _, _ -> selectedBasket = baskets[i] }
+    }
+
+    private fun generateProductTypePlaceholder(): ProductPlaceholder {
+        val product = Product("any " + productType.name, null)
+        val callback = { selectedProduct = product }
+        selectedProduct = product
+        return ProductPlaceholder(product, callback)
     }
 
 }
+
