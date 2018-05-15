@@ -32,9 +32,11 @@ class OffersFragment : Fragment() {
         phv_offers.layoutManager = GridLayoutManager(activity, 2)
         api.getOffers().schedule()
                 .map { OfferPlaceholder(it) }
+                .doOnComplete{ spin_kit.visibility = View.GONE }
                 .handle(activity, {
-                    phv_offers.addView(it)
-                    spin_kit.visibility = View.GONE
+                    it?.let { phv_offers.addView(it) }
+
                 })
+
     }
 }

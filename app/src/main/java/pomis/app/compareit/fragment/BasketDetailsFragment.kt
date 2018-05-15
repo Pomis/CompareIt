@@ -44,7 +44,7 @@ class BasketDetailsFragment : Fragment() {
                 .load(basket.imageUrl)
                 .into(iv_basket_shop_large)
 
-        phv_shops.addView(StoreListPlaceholder(basket.prices.map { it.store }, phv_shops))
+        phv_shops.addView(StoreListPlaceholder(basket.prices.map { it.store }))
 
     }
 }
