@@ -46,15 +46,6 @@ class TypeDetailsFragment : Fragment() {
         initButton()
     }
 
-    private fun initButton() {
-        RxView.clicks(b_add_to_basket)
-                .debounce(1, TimeUnit.SECONDS)
-                .subscribe {
-                    selectedProduct?.let { selectedBasket?.items?.add(it) }
-                    activity.finish()
-                }
-    }
-
     private fun initList() {
         productType = activity?.intent?.getSerializableExtra("obj") as ProductType
         phv_products.layoutManager = GridLayoutManager(activity, 3)
@@ -68,6 +59,7 @@ class TypeDetailsFragment : Fragment() {
                     phv_products.addView(it)
                 })
         ms_baskets.setItems(baskets.map { it.name })
+        selectedBasket = baskets[0]
         ms_baskets.setOnItemSelectedListener { _, i, _, _ -> selectedBasket = baskets[i] }
     }
 
@@ -76,6 +68,15 @@ class TypeDetailsFragment : Fragment() {
         val callback = { selectedProduct = product }
         selectedProduct = product
         return ProductPlaceholder(product, callback)
+    }
+
+    private fun initButton() {
+        RxView.clicks(b_add_to_basket)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe {
+                    selectedProduct?.let { selectedBasket?.items?.add(it) }
+                    activity.finish()
+                }
     }
 
 }

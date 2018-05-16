@@ -7,6 +7,7 @@ import org.koin.KoinContext
 import org.koin.android.KoinContextAware
 import org.koin.android.init
 import pomis.app.compareit.module.DependencyModule
+import pomis.app.compareit.utils.TypefaceUtils
 
 class App : Application(), KoinContextAware {
     override fun getKoin(): KoinContext {
@@ -17,6 +18,8 @@ class App : Application(), KoinContextAware {
 
     override fun onCreate() {
         super.onCreate()
+       // TypefaceUtils.overrideFont(getApplicationContext(), "SERIF", "Product Sans Regular.ttf");
+
         koinContext = Koin().init(this).build(DependencyModule(this))
     }
 }

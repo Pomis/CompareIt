@@ -19,4 +19,5 @@
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         app:SpinKit_Color="@color/colorOffers" />
+
 </RelativeLayout>

@@ -33,6 +33,9 @@ interface CompareitRouter {
     @POST("baskets/compare")
     fun compare(@Body basket: Basket): Observable<List<Store>>
 
+    @GET("stores")
+    fun getStores(): Single<List<Store>>
+
     companion object Factory {
         val LOCALHOST: String = "http://10.0.2.2:8080/api/"
         val HEROKU_DEV: String = "https://compare-it-app.herokuapp.com/api/"

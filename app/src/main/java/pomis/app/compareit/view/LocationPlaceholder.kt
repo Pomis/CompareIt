@@ -1,6 +1,8 @@
 package pomis.app.compareit.view
 
 import android.widget.TextView
+import com.mindorks.placeholderview.Animation
+import com.mindorks.placeholderview.annotations.Animate
 import com.mindorks.placeholderview.annotations.Layout
 import com.mindorks.placeholderview.annotations.Resolve
 import com.mindorks.placeholderview.annotations.View
@@ -8,6 +10,7 @@ import pomis.app.compareit.R
 import pomis.app.compareit.model.Location
 import pomis.app.materailplotview.Views.PercentageView
 
+@Animate(Animation.FADE_IN_ASC)
 @Layout(R.layout.item_location)
 class LocationPlaceholder(val location: Location) {
     @View(R.id.tv_label)

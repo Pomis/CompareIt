@@ -14,6 +14,7 @@ import pomis.app.compareit.utils.handle
 import pomis.app.compareit.utils.schedule
 import pomis.app.compareit.view.CategoryPlaceholder
 import pomis.app.compareit.view.ProductTypePlaceholder
+import pomis.app.compareit.view.SeparatorPlaceholder
 
 class ProductCategoriesFragment : Fragment() {
     val api by inject<CompareitRouter>()
@@ -28,8 +29,11 @@ class ProductCategoriesFragment : Fragment() {
         api.getCategories()
                 .schedule()
                 .map { CategoryPlaceholder(it) }
-                .handle(activity, { c ->
+                .doOnComplete{
+                    phv_categories.addView(SeparatorPlaceholder())
                     spin_kit.visibility = View.GONE
+                }
+                .handle(activity, { c ->
                     phv_categories.addView(c)
                     c.category.typeDTOS
                             .map { ProductTypePlaceholder(it) }

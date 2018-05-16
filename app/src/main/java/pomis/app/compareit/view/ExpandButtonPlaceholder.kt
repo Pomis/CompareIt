@@ -10,7 +10,7 @@ import pomis.app.compareit.R
 import pomis.app.compareit.model.Location
 
 @Layout(R.layout.item_expander)
-class ExpandButtonPlaceholder(val locations: List<Location>, val listView: PlaceHolderView) {
+class ExpandButtonPlaceholder(val locations: List<Location>, val listView: PlaceHolderView, val callback: (() -> Unit)?) {
     @View(R.id.tv_expand)
     lateinit var tvExpand: TextView
 
@@ -24,6 +24,6 @@ class ExpandButtonPlaceholder(val locations: List<Location>, val listView: Place
         locations.drop(1)
                 .forEach   { listView.addView(LocationPlaceholder(it)) }
                 .let       { listView.removeView(this) }
-
+        callback?.invoke()
     }
 }

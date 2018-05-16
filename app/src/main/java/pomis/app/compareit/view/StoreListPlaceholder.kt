@@ -15,8 +15,8 @@ import pomis.app.compareit.model.Store
 class StoreListPlaceholder(val stores: List<Store>) {
     lateinit var locations: ArrayList<Location>
 
-//    @View(R.id.tv_label)
-//    lateinit var tvLabel : TextView
+    @View(R.id.tv_hint)
+    lateinit var tvHint : TextView
 
     @View(R.id.phv_locations)
     lateinit var phvLocations: PlaceHolderView
@@ -30,11 +30,14 @@ class StoreListPlaceholder(val stores: List<Store>) {
 
         stores  .map        { x -> x.locations?.forEach { it.shopName = x.name }; x }
                 .flatMap    { it.locations!!.asIterable() }
-                .map        { locations.add(it); it }//phvLocations.addView(LocationPlaceholder(it)) }
+                .map        { locations.add(it); it }
                 .first()
-                .also       { phvLocations.addView(LocationPlaceholder(it)); phvLocations.addView(ExpandButtonPlaceholder(locations, phvLocations)) }
+                .also       {
+                    phvLocations.addView(LocationPlaceholder(it))
+                    phvLocations.addView(ExpandButtonPlaceholder(locations, phvLocations,
+                            { tvHint.text = "All shops" }))
+                }
 
-        //locs .forEach { listView.addView(LocationPlaceholder(it)) }
     }
 
 

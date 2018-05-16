@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
 
-    android:layout_height="wrap_content">
+    android:foreground="?attr/selectableItemBackgroundBorderless">
+
     <ImageView
         android:id="@+id/iv_category_image"
-        android:layout_margin="16dp"
-        android:src="@mipmap/ic_launcher_round"
-        android:scaleType="centerInside"
         android:layout_width="32dp"
-        android:layout_height="32dp" />
+        android:layout_height="32dp"
+        android:layout_margin="16dp"
+        android:scaleType="centerInside"
+        android:src="@mipmap/ic_launcher_round" />
+
     <TextView
-        android:layout_toRightOf="@id/iv_category_image"
         android:id="@+id/tv_category_title"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp"
-        android:textSize="20sp"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="64dp"
+        android:ellipsize="end"
+        android:layout_toRightOf="@id/iv_category_image"
+        android:gravity="center_vertical"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/iv_arrow"
-        android:src="@drawable/ic_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:src="@drawable/ic_arrow" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="64dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorSeparator"
-        />
+        android:layout_marginLeft="64dp"
+        android:background="@color/colorSeparator" />
 </RelativeLayout>

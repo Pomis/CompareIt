@@ -37,12 +37,12 @@
                     android:transitionName="transText" />
 
                 <com.mindorks.placeholderview.PlaceHolderView
-                    android:id="@+id/phv_shops"
+                    android:id="@+id/phv_products"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
                 <com.mindorks.placeholderview.PlaceHolderView
-                    android:id="@+id/phv_products"
+                    android:id="@+id/phv_shops"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

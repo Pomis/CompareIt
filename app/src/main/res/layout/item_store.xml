@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <!--<TextView-->
-        <!--android:id="@+id/tv_label"-->
-        <!--android:textSize="18sp"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:textColor="@color/black"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!--android:id="@+id/tv_label"-->
+    <!--android:textSize="18sp"-->
+    <!--android:layout_margin="16dp"-->
+    <!--android:textColor="@color/black"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
 
     <!--<TextView-->
-        <!--android:id="@+id/tv_badge"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!--android:id="@+id/tv_badge"-->
+    <!--android:layout_margin="16dp"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content" />-->
 
     <TextView
         android:id="@+id/tv_hint"
-        android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_label"
-        android:text="Shop with best price"/>
+        android:layout_margin="16dp"
+        android:textColor="@color/black"
+        android:text="Shop with best price"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <com.mindorks.placeholderview.PlaceHolderView
-        android:layout_below="@id/tv_hint"
         android:id="@+id/phv_locations"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_hint" />
 </RelativeLayout>

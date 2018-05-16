@@ -17,6 +17,7 @@ import pomis.app.compareit.repository.CompareitRouter
 import pomis.app.compareit.utils.ErrorHandler
 import pomis.app.compareit.utils.handle
 import pomis.app.compareit.utils.schedule
+import pomis.app.compareit.view.SeparatorPlaceholder
 
 
 class OffersFragment : Fragment() {
@@ -32,7 +33,11 @@ class OffersFragment : Fragment() {
         phv_offers.layoutManager = GridLayoutManager(activity, 2)
         api.getOffers().schedule()
                 .map { OfferPlaceholder(it) }
-                .doOnComplete{ spin_kit.visibility = View.GONE }
+                .doOnComplete{
+                    spin_kit.visibility = View.GONE
+                    phv_offers.addView(SeparatorPlaceholder())
+                    phv_offers.addView(SeparatorPlaceholder())
+                }
                 .handle(activity, {
                     it?.let { phv_offers.addView(it) }
 
