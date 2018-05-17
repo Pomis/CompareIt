@@ -104,6 +104,7 @@ class BottomNavigationActivity : BaseActivity() {
                     if (bottom_navigation.itemsCount < 4)
                         bottom_navigation.addItem(AHBottomNavigationItem(R.string.search, R.drawable.ic_sale, R.color.colorSearch))
                     bottom_navigation.setCurrentItem(3, true)
+                    bottom_navigation.restoreBottomNavigation()
                     (fragmentAndColor.first as SearchResultFragment).searchResult = it
                 }, {
                     ErrorHandler.handle(it, this)

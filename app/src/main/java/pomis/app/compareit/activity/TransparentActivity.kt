@@ -14,8 +14,10 @@ import pomis.app.compareit.base.BaseActivity
 import pomis.app.compareit.fragment.BasketDetailsFragment
 import pomis.app.compareit.fragment.TypeDetailsFragment
 import pomis.app.compareit.fragment.OfferDetailsFragment
+import pomis.app.compareit.fragment.ProductDetailsFragment
 import pomis.app.compareit.model.Basket
 import pomis.app.compareit.model.Offer
+import pomis.app.compareit.model.Product
 import pomis.app.compareit.model.ProductType
 import java.io.Serializable
 
@@ -27,6 +29,7 @@ class TransparentActivity : BaseActivity() {
         val fragment = when(intent.getSerializableExtra("obj")) {
             is Offer        -> OfferDetailsFragment()
             is ProductType  -> TypeDetailsFragment()
+            is Product      -> ProductDetailsFragment()
             is Basket       -> BasketDetailsFragment()
             else            -> null
         }

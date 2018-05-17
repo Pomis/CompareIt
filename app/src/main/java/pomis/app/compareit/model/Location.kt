@@ -6,5 +6,6 @@ data class Location(
     val address: String,
     val lat: Float,
     val lon: Float,
-    var shopName: String?
+    var shopName: String?,
+    var availability: Int?
 ):Serializable

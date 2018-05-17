@@ -7,5 +7,6 @@ import java.io.Serializable
  */
 class Store (
         val name: String,
-        val locations: List<Location>?
+        val locations: List<Location>?,
+        val imageURL: String?
 ):Serializable

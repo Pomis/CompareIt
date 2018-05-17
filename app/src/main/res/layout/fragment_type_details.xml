@@ -20,9 +20,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-
-
-
                     <TextView
                         android:text="You can specify wanted product."
                         android:layout_margin="16dp"

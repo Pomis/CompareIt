@@ -32,7 +32,7 @@ class LocationPlaceholder(val location: Location) {
     fun onResolve() {
         tvLabel.text = location.shopName
         tvSublabel.text = location.address
-        val perc = (70+Math.random()*30).toInt()
+        val perc = (75+((2*Math.random()).toInt())*25)
         pvAvailability.percentage = perc
         pvAvailability.text = "${perc}%"
         tvCost.text = "€${(5+Math.random()*7).toInt()}"

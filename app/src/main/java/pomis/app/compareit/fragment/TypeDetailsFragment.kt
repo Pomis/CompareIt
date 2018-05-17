@@ -23,6 +23,11 @@ import pomis.app.compareit.view.ProductPlaceholder
 import java.util.concurrent.TimeUnit
 
 class TypeDetailsFragment : Fragment() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_type_details, container, false)
+    }
+
     private lateinit var productType: ProductType
     private var selectedProduct: Product? = null
         set(value) {
@@ -35,10 +40,6 @@ class TypeDetailsFragment : Fragment() {
     private val baskets by inject<ArrayList<Basket>>()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_type_details, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

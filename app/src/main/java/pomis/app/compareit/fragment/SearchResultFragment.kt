@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_search_result.*
 
 import pomis.app.compareit.R
+import pomis.app.compareit.activity.TransparentActivity
 import pomis.app.compareit.model.Product
 import pomis.app.compareit.model.SearchResult
 import pomis.app.compareit.view.HeaderPlaceholder
@@ -33,19 +34,19 @@ class SearchResultFragment : Fragment() {
     }
 
     private fun updateLists() {
-        if (phv_search != null) {
-            Log.d("KEK", "updateLists()")
-            phv_search.removeAllViews()
+        phv_search?.run{
+            removeAllViews()
 
-            phv_search.addView(HeaderPlaceholder("Product types", "${searchResult?.productTypes?.size}"))
-            searchResult?.productTypes?.forEach { phv_search.addView(ProductTypePlaceholder(it)) }
+            addView(HeaderPlaceholder("Product types", "${searchResult?.productTypes?.size}"))
+            searchResult?.productTypes?.forEach { addView(ProductTypePlaceholder(it)) }
 
-            phv_search.addView(HeaderPlaceholder("Products", "${searchResult?.products?.size}"))
-            searchResult?.products?.forEach { phv_search.addView(ProductPlaceholder(it, null)) }
+            addView(HeaderPlaceholder("Products", "${searchResult?.products?.size}"))
+            searchResult?.products?.forEach { addView(ProductPlaceholder(it, { TransparentActivity.start(activity, it) })) }
 
-            phv_search.addView(HeaderPlaceholder("Stores", "${searchResult?.stores?.size}"))
-            searchResult?.stores?.forEach { phv_search.addView(ProductPlaceholder(Product(it.name, null), null)) }
-            phv_search.refresh();
+            addView(HeaderPlaceholder("Stores", "${searchResult?.stores?.size}"))
+            searchResult?.stores?.forEach { addView(ProductPlaceholder(Product(it.name, it.imageURL), null)) }
+
+            refresh()
         }
     }
 

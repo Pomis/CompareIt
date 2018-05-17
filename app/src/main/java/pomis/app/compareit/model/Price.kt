@@ -5,6 +5,5 @@ import java.math.BigDecimal
 
 data class Price(
         val store: Store,
-        val price: BigDecimal,
-        val availability: Float
+        val price: BigDecimal
 ):Serializable
